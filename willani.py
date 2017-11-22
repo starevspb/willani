@@ -28,6 +28,15 @@ class bcolors:
     GREY = '\033[97m'
     BLACK = '\033[30m'
 
+def progress(count, total, status=''):
+    global bcolors
+    bar_len = 60
+    filled_len = int(round(bar_len * count / float(total)))
+    percents = round(100.0 * count / float(total), 1)
+    bar = '=' * filled_len + '-' * (bar_len - filled_len)
+    sys.stdout.write(bcolors.BLACK + '[%s] %s%s ...%s\r' % (bar, percents, '%', status))
+    sys.stdout.flush()
+
 try:
     print "####################################################"
     print "####################   WILLANI   ###################"
@@ -42,7 +51,14 @@ try:
     # Run speed SYN scan nmap for IP
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
+        total = len(lines)
+        count = 0
+        #print total
         for line in lines:
+            count += 1
+            sstatus = 'total:' + format(total) + ' count:' + format(count)
+            progress(count, total, status=sstatus)
+            #
             ip = line
             stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
             try:
