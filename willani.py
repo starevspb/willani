@@ -11,6 +11,7 @@ import re
 import datetime
 import socket
 from time import gmtime, strftime
+import subprocess
 
 
 # encoding=utf8
@@ -50,8 +51,9 @@ try:
                 #
                 print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
                 cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
-                result = os.system(cmd)
-                print result
+                #result = os.system(cmd)
+                output = subprocess.check_output(cmd, shell=True)
+                print output
                 #
             except socket.error:
                 # error
