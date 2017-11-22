@@ -35,12 +35,27 @@ try:
     result = os.system(cmd)
     print result
 
-    # Get Ip addresses
+    # Run speed SYN scan nmap for IP
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
-        cmd = "nmap -sS -T4 "+ lines[0]
+        cmd = "nmap -sS -T4 "+ lines[0] + " -oN " + dir_path+'/logs/nmap_syn_' + lines[0] + '.txt'
         result = os.system(cmd)
         print result
+
+    # Run speed UDP scan nmap for IP
+    with open(dir_path + '/scope/IP.txt') as f:
+        lines = f.read().splitlines()
+        cmd = "nmap -sU " + lines[0] + " -oN " + dir_path+'/logs/nmap_udp_' + lines[0] + '.txt'
+        result = os.system(cmd)
+        print result
+
+    # Run full SYN scan nmap for IP
+    with open(dir_path + '/scope/IP.txt') as f:
+        lines = f.read().splitlines()
+        cmd = "nmap -sS -T4 -p- " + lines[0] + " -oN " + dir_path+'/logs/nmap_full_' + lines[0] + '.txt'
+        result = os.system(cmd)
+        print result
+
 
 
 except KeyboardInterrupt:
