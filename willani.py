@@ -56,8 +56,6 @@ try:
         #print total
         for line in lines:
             count += 1
-            sstatus = 'total:' + format(total) + ' count:' + format(count)
-            progress(count, total, status=sstatus)
             #
             ip = line
             stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
@@ -66,6 +64,8 @@ try:
                 socket.inet_aton(ip)
                 #
                 print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
+                sstatus = 'total:' + format(total) + ' count:' + format(count)
+                progress(count, total, status=sstatus)
                 cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
                 output = subprocess.check_output(cmd, shell=True)
