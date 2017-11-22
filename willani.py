@@ -13,7 +13,7 @@ import datetime
 # encoding=utf8
 reload(sys)
 sys.setdefaultencoding('utf8')
-
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
 class bcolors:
     RED = '\033[91m'
@@ -36,7 +36,7 @@ try:
     print result
 
     # Get Ip addresses
-    with open('IP.txt') as f:
+    with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
         print lines
 
