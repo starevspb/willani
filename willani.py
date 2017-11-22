@@ -53,7 +53,10 @@ try:
                 cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
                 output = subprocess.check_output(cmd, shell=True)
-                print output
+                #print output
+                items = re.findall(".*tcp", output, re.MULTILINE)
+                for x in items:
+                    print x
                 #
             except socket.error:
                 # error
