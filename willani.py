@@ -38,7 +38,9 @@ try:
     # Get Ip addresses
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
-        print lines
+        cmd = "nmap -sS -T4 "+ lines[0]
+        result = os.system(cmd)
+        print result
 
 
 except KeyboardInterrupt:
