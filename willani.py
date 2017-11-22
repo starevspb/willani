@@ -40,19 +40,20 @@ try:
     # Run speed SYN scan nmap for IP
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
-        ip = lines[0]
-        try:
-            # check ip
-            socket.inet_aton(ip)
-            #
-            print(bcolors.YELLOW + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
-            cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '.txt'
-            result = os.system(cmd)
-            print result
-            #
-        except socket.error:
-            # error
-            print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
+        for line in lines:
+            ip = line[0]
+            try:
+                # check ip
+                socket.inet_aton(ip)
+                #
+                print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
+                cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '.txt'
+                result = os.system(cmd)
+                print result
+                #
+            except socket.error:
+                # error
+                print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
 
     # Run speed UDP scan nmap for IP
     #with open(dir_path + '/scope/IP.txt') as f:
