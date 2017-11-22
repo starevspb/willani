@@ -29,10 +29,17 @@ try:
     print "####################   WILLANI   ###################"
     print "####################################################"
 
+
+    # Get version nmap
     cmd = "nmap -V"
     result = os.system(cmd)
-
     print result
+
+    # Get Ip addresses
+    with open('IP.txt') as f:
+        lines = f.read().splitlines()
+        print lines
+
 
 except KeyboardInterrupt:
     # quit
