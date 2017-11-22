@@ -41,7 +41,7 @@ try:
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
         for line in lines:
-            ip = line[0]
+            ip = line
             try:
                 # check ip
                 socket.inet_aton(ip)
