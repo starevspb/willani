@@ -9,6 +9,8 @@ import sys
 import requests
 import re
 import datetime
+import socket
+
 
 # encoding=utf8
 reload(sys)
@@ -33,28 +35,38 @@ try:
     # Get version nmap
     cmd = "nmap -V"
     result = os.system(cmd)
-    print result
+    #print result
 
     # Run speed SYN scan nmap for IP
     with open(dir_path+'/scope/IP.txt') as f:
         lines = f.read().splitlines()
-        cmd = "nmap -sS -T4 "+ lines[0] + " -oN " + dir_path+'/logs/nmap_syn_' + lines[0] + '.txt'
-        result = os.system(cmd)
-        print result
+        ip = lines[0]
+        try:
+            # check ip
+            socket.inet_aton(ip)
+            #
+            print(bcolors.YELLOW + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
+            cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '.txt'
+            result = os.system(cmd)
+            print result
+            #
+        except socket.error:
+            # error
+            print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
 
     # Run speed UDP scan nmap for IP
-    with open(dir_path + '/scope/IP.txt') as f:
-        lines = f.read().splitlines()
-        cmd = "nmap -sU " + lines[0] + " -oN " + dir_path+'/logs/nmap_udp_' + lines[0] + '.txt'
-        result = os.system(cmd)
-        print result
+    #with open(dir_path + '/scope/IP.txt') as f:
+    #    lines = f.read().splitlines()
+    #    cmd = "nmap -sU " + lines[0] + " -oN " + dir_path+'/logs/nmap_udp_' + lines[0] + '.txt'
+    #    result = os.system(cmd)
+    #    print result
 
     # Run full SYN scan nmap for IP
-    with open(dir_path + '/scope/IP.txt') as f:
-        lines = f.read().splitlines()
-        cmd = "nmap -sS -T4 -p- " + lines[0] + " -oN " + dir_path+'/logs/nmap_full_' + lines[0] + '.txt'
-        result = os.system(cmd)
-        print result
+    #with open(dir_path + '/scope/IP.txt') as f:
+    #    lines = f.read().splitlines()
+    #    cmd = "nmap -sS -T4 -p- " + lines[0] + " -oN " + dir_path+'/logs/nmap_full_' + lines[0] + '.txt'
+    #    result = os.system(cmd)
+    #    print result
 
 
 
