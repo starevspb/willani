@@ -25,9 +25,14 @@ class bcolors:
     BLACK = '\033[30m'
 
 try:
-    print "yes"
+    print "####################################################"
+    print "####################   WILLANI   ###################"
+    print "####################################################"
 
+    cmd = "nmap -V"
+    result = os.system(cmd)
 
+    print result
 
 except KeyboardInterrupt:
     # quit
