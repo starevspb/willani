@@ -10,6 +10,7 @@ import requests
 import re
 import datetime
 import socket
+from time import gmtime, strftime
 
 
 # encoding=utf8
@@ -42,12 +43,13 @@ try:
         lines = f.read().splitlines()
         for line in lines:
             ip = line
+            stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
             try:
                 # check ip
                 socket.inet_aton(ip)
                 #
                 print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
-                cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '.txt'
+                cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 result = os.system(cmd)
                 print result
                 #
