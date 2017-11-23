@@ -1,0 +1,7 @@
+
+
+
+Install components
+
+apt-get install python-ntplib -y
+apt-get install nmap -y
