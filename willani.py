@@ -81,9 +81,13 @@ try:
                 progress(count, total, status=sstatus)
                 cmd = "nmap -sS -T4 " + ip + " --open -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
-                output = subprocess.check_output(cmd, shell=True)
+                output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                while output.poll() is None:
+                    out = output.stdout.read(1)
+                    sys.stdout.write(out)
+                    sys.stdout.flush()
                 #print output
-                items = re.findall(".*tcp", output, re.MULTILINE)
+                items = re.findall(".*tcp", output.stdout, re.MULTILINE)
                 if len(items) > 0:
                     print("Найдены следующие порты:                                                                                   ")
                 else:
