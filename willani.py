@@ -44,7 +44,7 @@ class bcolors:
 
 def progress(count, total, status=''):
     global bcolors
-    bar_len = 60
+    bar_len = 50
     filled_len = int(round(bar_len * count / float(total)))
     percents = round(100.0 * count / float(total), 1)
     bar = '=' * filled_len + '-' * (bar_len - filled_len)
@@ -69,7 +69,6 @@ try:
         count = 0
         #print total
         for line in lines:
-            count += 1
             #
             ip = line
             stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
@@ -85,24 +84,28 @@ try:
                 start = time.time()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 while output.poll() is None:
-                    sleep(1)
+                    sleep(0.5)
+                    # Подсчет времени выполнения
                     elapsed = time.time()
                     elapsed = int(elapsed - start)
                     out = " | Время задачи: " + str(elapsed) + " сек."
                     sstatus = 'Всего:' + format(total) + ' Выполнено:' + format(count) + out
+                    # Выводим прогрессбар
                     progress(count, total, status=sstatus)
                 #print output
                 items = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
                 if len(items) > 0:
-                    print("Найдены следующие порты:                                                                                         ")
+                    print("Найдены следующие порты:                                                                                                ")
                 else:
-                    print("Открытых портов не обнаружено.                                                                                   ")
+                    print("Открытых портов не обнаружено.                                                                                          ")
                 for x in items:
                     print x
                 #
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
+            # Обновление счетчика
+            count += 1
 
 
 except KeyboardInterrupt:
