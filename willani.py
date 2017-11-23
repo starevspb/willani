@@ -91,10 +91,6 @@ try:
                     out = " | Время задачи: " + str(elapsed) + " сек."
                     sstatus = 'Всего:' + format(total) + ' Выполнено:' + format(count) + out
                     progress(count, total, status=sstatus)
-
-
-                    sys.stdout.write(out)
-                    sys.stdout.flush()
                 #print output
                 items = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
                 if len(items) > 0:
