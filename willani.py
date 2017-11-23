@@ -24,7 +24,10 @@ timezone = subprocess.check_output('date +"%Z"', shell=True)
 #print timezone
 
 if timezone.strip() != 'MSK':
-    if raw_input('Часовой пояс не московский! Продолжить? [y/n]').lower()[0]!='y':
+    try:
+        if raw_input('Часовой пояс не московский! Продолжить? [y/n]').lower()[0]!='y':
+            exit(1)
+    except:
         exit(1)
 
 class bcolors:
