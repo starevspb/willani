@@ -82,12 +82,12 @@ try:
                 progress(count, total, status=sstatus)
                 cmd = "nmap -sS -T4 " + ip + " --open -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
-                start = time.clock()
+                start = time.time()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 while output.poll() is None:
                     sleep(1)
-                    elapsed = time.clock()
-                    elapsed = elapsed - start
+                    elapsed = time.time()
+                    elapsed = int(elapsed - start)
                     out = "Время выполнения: " + str(elapsed) + " сек. \r"
                     sys.stdout.write(out)
                     sys.stdout.flush()
