@@ -79,7 +79,7 @@ try:
                 print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
                 sstatus = 'total:' + format(total) + ' count:' + format(count)
                 progress(count, total, status=sstatus)
-                cmd = "nmap -sS -T4 " + ip + " -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
+                cmd = "nmap -sS -T4 " + ip + " --open -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
                 output = subprocess.check_output(cmd, shell=True)
                 #print output
