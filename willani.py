@@ -12,6 +12,7 @@ import datetime
 import socket
 from time import gmtime, strftime
 import subprocess
+from time import sleep
 
 
 # encoding=utf8
@@ -84,9 +85,10 @@ try:
                 start = time.clock()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 while output.poll() is None:
+                    sleep(0.1)
                     elapsed = time.clock()
                     elapsed = elapsed - start
-                    out = "Время выполнения: " + elapsed + " сек. "
+                    out = "Время выполнения: " + str(elapsed) + " сек. "
                     sys.stdout.write(out)
                     sys.stdout.flush()
                 #print output
