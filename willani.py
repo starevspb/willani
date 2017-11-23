@@ -81,13 +81,16 @@ try:
                 progress(count, total, status=sstatus)
                 cmd = "nmap -sS -T4 " + ip + " --open -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
+                start = time.clock()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 while output.poll() is None:
-                    out = output.stdout.read(1)
+                    elapsed = time.clock()
+                    elapsed = elapsed - start
+                    out = "Время выполнения: " + elapsed + " сек. "
                     sys.stdout.write(out)
                     sys.stdout.flush()
                 #print output
-                items = re.findall(".*tcp", output.stdout, re.MULTILINE)
+                items = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
                 if len(items) > 0:
                     print("Найдены следующие порты:                                                                                   ")
                 else:
@@ -98,21 +101,6 @@ try:
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
-
-    # Run speed UDP scan nmap for IP
-    #with open(dir_path + '/scope/IP.txt') as f:
-    #    lines = f.read().splitlines()
-    #    cmd = "nmap -sU " + lines[0] + " -oN " + dir_path+'/logs/nmap_udp_' + lines[0] + '.txt'
-    #    result = os.system(cmd)
-    #    print result
-
-    # Run full SYN scan nmap for IP
-    #with open(dir_path + '/scope/IP.txt') as f:
-    #    lines = f.read().splitlines()
-    #    cmd = "nmap -sS -T4 -p- " + lines[0] + " -oN " + dir_path+'/logs/nmap_full_' + lines[0] + '.txt'
-    #    result = os.system(cmd)
-    #    print result
-
 
 
 except KeyboardInterrupt:
