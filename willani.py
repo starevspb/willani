@@ -21,7 +21,11 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 
 
 timezone = subprocess.check_output('date +"%Z"', shell=True)
-print timezone
+#print timezone
+
+if timezone.strip() != 'MSK':
+    if raw_input('Часовой пояс не московский! Продолжить? [y/n]').lower()[0]!='y':
+        exit(1)
 
 class bcolors:
     RED = '\033[91m'
