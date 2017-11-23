@@ -88,15 +88,19 @@ try:
                     sleep(1)
                     elapsed = time.time()
                     elapsed = int(elapsed - start)
-                    out = "Время выполнения: " + str(elapsed) + " сек. \r"
+                    out = " | Время задачи: " + str(elapsed) + " сек."
+                    sstatus = 'Всего:' + format(total) + ' Выполнено:' + format(count) + out
+                    progress(count, total, status=sstatus)
+
+
                     sys.stdout.write(out)
                     sys.stdout.flush()
                 #print output
                 items = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
                 if len(items) > 0:
-                    print("Найдены следующие порты:                                                                                   ")
+                    print("Найдены следующие порты:                                                                                         ")
                 else:
-                    print("Открытых портов не обнаружено.                                                                             ")
+                    print("Открытых портов не обнаружено.                                                                                   ")
                 for x in items:
                     print x
                 #
