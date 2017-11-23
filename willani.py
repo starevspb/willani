@@ -19,6 +19,10 @@ reload(sys)
 sys.setdefaultencoding('utf8')
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
+
+timezone = subprocess.check_output('date +"%Z"', shell=True)
+print timezone
+
 class bcolors:
     RED = '\033[91m'
     GREEN = '\033[92m'
