@@ -26,8 +26,10 @@ timezone = subprocess.check_output('date +"%Z"', shell=True)
 if timezone.strip() != 'MSK':
     try:
         if raw_input('Часовой пояс не московский! Продолжить? [y/n]').lower()[0]!='y':
+            print("Попробуйте запустить: dpkg-reconfigure tzdata")
             exit(1)
     except:
+        print("Попробуйте запустить: dpkg-reconfigure tzdata")
         exit(1)
 
 class bcolors:
