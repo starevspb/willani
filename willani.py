@@ -45,8 +45,8 @@ try:
 
     # Get version nmap
     cmd = "nmap -V"
-    result = os.system(cmd)
-    #print result
+    output = subprocess.check_output(cmd, shell=True)
+    #print output
 
     # Run speed SYN scan nmap for IP
     with open(dir_path+'/scope/IP.txt') as f:
@@ -71,6 +71,10 @@ try:
                 output = subprocess.check_output(cmd, shell=True)
                 #print output
                 items = re.findall(".*tcp", output, re.MULTILINE)
+                if len(items) > 0:
+                    print("Найдены следующие порты:                                                                                   ")
+                else:
+                    print("Открытых портов не обнаружено.                                                                             ")
                 for x in items:
                     print x
                 #
