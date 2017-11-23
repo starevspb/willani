@@ -85,10 +85,10 @@ try:
                 start = time.clock()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 while output.poll() is None:
-                    sleep(0.1)
+                    sleep(1)
                     elapsed = time.clock()
                     elapsed = elapsed - start
-                    out = "Время выполнения: " + str(elapsed) + " сек. "
+                    out = "Время выполнения: " + str(elapsed) + " сек. \r"
                     sys.stdout.write(out)
                     sys.stdout.flush()
                 #print output
