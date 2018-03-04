@@ -92,6 +92,8 @@ try:
             #
             ip = line
             stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
+            with open(directory + '/summary.csv', 'a+') as f:
+                f.write('IP;Ports \n')
             try:
                 # check ip
                 socket.inet_aton(ip)
