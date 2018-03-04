@@ -88,12 +88,14 @@ try:
                 os.mkdir(directory)
                 break
         print(bcolors.GREEN + "Отчет будет сохранен в каталоге: " + str(directory) + bcolors.BLACK)
+
+        with open(directory + '/summary.csv', 'a+') as f:
+            f.write('IP;Ports \n')
+
         for line in lines:
             #
             ip = line
             stime = strftime("%d-%m-%Y_%H:%M:%S", gmtime())
-            with open(directory + '/summary.csv', 'a+') as f:
-                f.write('IP;Ports \n')
             try:
                 # check ip
                 socket.inet_aton(ip)
