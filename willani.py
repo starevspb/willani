@@ -13,6 +13,10 @@ import socket
 from time import gmtime, strftime
 import subprocess
 from time import sleep
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--scan', nargs='?', help='выберите режим сканирования fast или full')
 
 
 # encoding=utf8
