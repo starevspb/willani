@@ -87,6 +87,7 @@ try:
             except:
                 os.mkdir(directory)
                 break
+        print(bcolors.GREEN + "Отчет будет сохранен в каталоге: " + str(directory) + bcolors.BLACK)
         for line in lines:
             #
             ip = line
