@@ -117,11 +117,12 @@ try:
                     print("Найдены следующие порты:                                                                                                ")
                     for x in items:
                         print x
+                    print(ip + ";" + ', '.join(items))
                 else:
                     print("Открытых портов не обнаружено.                                                                                          ")
-
+                    print(ip + ";Открытых портов не обнаружено.")
                 #
-                print(ip + ";" + ', '.join(items))
+
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
