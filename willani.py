@@ -117,7 +117,7 @@ try:
                     print("Найдены следующие порты:                                                                                                ")
                     for x in items:
                         print x
-                    print(ip + ";" + ', '.join(items))
+                    print(ip + ";" + '\n '.join(items))
                 else:
                     print("Открытых портов не обнаружено.                                                                                          ")
                     print(ip + ";Открытых портов не обнаружено.")
