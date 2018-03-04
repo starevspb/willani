@@ -115,12 +115,13 @@ try:
                 items = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
                 if len(items) > 0:
                     print("Найдены следующие порты:                                                                                                ")
+                    for x in items:
+                        print x
                 else:
                     print("Открытых портов не обнаружено.                                                                                          ")
-                for x in items:
-                    print x
-                #
 
+                #
+                print(ip + ";" + items)
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
