@@ -19,6 +19,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--scan', nargs='?', help='выберите режим сканирования fast или full')
 args = parser.parse_args()
 
+print scan
 
 # encoding=utf8
 reload(sys)
