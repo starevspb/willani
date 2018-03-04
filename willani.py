@@ -19,9 +19,11 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--scan", help="Режим сканирования full или fast")
 args = parser.parse_args()
 if args.scan == 'fast':
-    print("fast turned on")
+    print("Режим быстрого сканирования")
+    nmapscan = ''
 if args.scan == 'full':
-    print("full turned on")
+    print("Режим полного сканирования")
+    nmapscan = ' -p- '
 
 # encoding=utf8
 reload(sys)
@@ -93,10 +95,10 @@ try:
                 # check ip
                 socket.inet_aton(ip)
                 #
-                print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
+                print(bcolors.GREEN + "Сканирование хоста: " + ip + bcolors.BLACK)
                 sstatus = 'total:' + format(total) + ' count:' + format(count)
                 progress(count, total, status=sstatus)
-                cmd = "nmap -sS -T4 " + ip + " --open -oN " + directory + '/nmap_syn_' + ip + '_' + stime + '.txt'
+                cmd = "nmap -sS -T4 " + ' ' + nmapscan + ' ' + ip + " --open -oN " + directory + '/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
                 start = time.time()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
