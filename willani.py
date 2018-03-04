@@ -16,7 +16,7 @@ from time import sleep
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--scan", default=fast, help="Режим сканирования full или fast")
+parser.add_argument("--scan", default='fast', help="Режим сканирования full или fast")
 args = parser.parse_args()
 
 # encoding=utf8
