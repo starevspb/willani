@@ -16,10 +16,10 @@ from time import sleep
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--scan', nargs='?', help='выберите режим сканирования fast или full')
+parser.add_argument('scan', nargs='?', help='выберите режим сканирования fast или full')
 args = parser.parse_args()
 
-print scan
+print(args.scan)
 
 # encoding=utf8
 reload(sys)
