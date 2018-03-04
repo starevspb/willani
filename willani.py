@@ -68,8 +68,9 @@ try:
         total = len(lines)
         count = 0
         #print total
-        i = 1
+        i = 0
         while i <= 10:
+            i = i + 1
             directory = os.path.dirname(dir_path + '/logs/report' + str(i) + '/file')
             print directory
             try:
