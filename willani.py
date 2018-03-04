@@ -16,14 +16,8 @@ from time import sleep
 import argparse
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--scan", help="Режим сканирования full или fast")
+parser.add_argument("--scan", default=fast, help="Режим сканирования full или fast")
 args = parser.parse_args()
-if args.scan == 'fast':
-    print("Режим быстрого сканирования")
-    nmapscan = ''
-if args.scan == 'full':
-    print("Режим полного сканирования")
-    nmapscan = ' -p- '
 
 # encoding=utf8
 reload(sys)
@@ -44,13 +38,13 @@ if timezone.strip() != 'MSK':
         exit(1)
 
 class bcolors:
-    RED = '\033[91m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
+    RED = '\033[91m' # ошибки
+    GREEN = '\033[92m' # уведомление
+    YELLOW = '\033[93m' # предупреждение
     BLUE = '\033[94m'
     PURPLE = '\033[95m'
     GREY = '\033[97m'
-    BLACK = '\033[30m'
+    BLACK = '\033[30m' # обычный
 
 def progress(count, total, status=''):
     global bcolors
@@ -66,6 +60,12 @@ try:
     print "####################   WILLANI   ###################"
     print "####################################################"
 
+    if args.scan == 'fast':
+        print(bcolors.GREEN + "Режим быстрого сканирования" + bcolors.BLACK)
+        nmapscan = ''
+    if args.scan == 'full':
+        print(bcolors.GREEN + "Режим полного сканирования" + bcolors.BLACK)
+        nmapscan = ' -p- '
 
     # Get version nmap
     cmd = "nmap -V"
@@ -120,6 +120,7 @@ try:
                 for x in items:
                     print x
                 #
+
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
