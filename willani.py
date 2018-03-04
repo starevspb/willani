@@ -118,11 +118,11 @@ try:
                     print("Найдены следующие порты:                                                                                                ")
                     for x in items:
                         print x
-                    with open(directory + '/summary.csv', 'w') as f:
+                    with open(directory + '/summary.csv', 'a+') as f:
                         f.write(ip + ";" + '\n '.join(items))
                 else:
                     print("Открытых портов не обнаружено.                                                                                          ")
-                    with open(directory + '/summary.csv', 'w') as f:
+                    with open(directory + '/summary.csv', 'a+') as f:
                         f.write(ip + ";Открытых портов не обнаружено.")
                 #
 
