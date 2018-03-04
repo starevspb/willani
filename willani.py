@@ -68,6 +68,13 @@ try:
         total = len(lines)
         count = 0
         #print total
+        i = 1
+        while i <= 10:
+            directory = os.path.dirname(dir_path + '/logs/report' + i)
+            try:
+                os.stat(directory)
+            except:
+                os.mkdir(directory)
         for line in lines:
             #
             ip = line
