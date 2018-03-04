@@ -121,7 +121,7 @@ try:
                     print("Открытых портов не обнаружено.                                                                                          ")
 
                 #
-                print(ip + ";" + items)
+                print(ip + ";" + ', '.join(items))
             except socket.error:
                 # error
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
