@@ -119,11 +119,11 @@ try:
                     for x in items:
                         print x
                     with open(directory + '/summary.csv', 'a+') as f:
-                        f.write(ip + ";" + ', '.join(items))
+                        f.write(ip + ";" + ', '.join(items) + '\n')
                 else:
                     print("Открытых портов не обнаружено.                                                                                          ")
                     with open(directory + '/summary.csv', 'a+') as f:
-                        f.write(ip + ";Открытых портов не обнаружено.")
+                        f.write(ip + ";Открытых портов не обнаружено.\n")
                 #
 
             except socket.error:
