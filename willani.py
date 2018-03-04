@@ -69,10 +69,9 @@ try:
         count = 0
         #print total
         i = 0
-        while i <= 10:
+        while i <= 1000:
             i = i + 1
             directory = os.path.dirname(dir_path + '/logs/report' + str(i) + '/file')
-            print directory
             try:
                 os.stat(directory)
             except:
@@ -89,7 +88,7 @@ try:
                 print(bcolors.GREEN + "Быстрое сканирование хоста: " + ip + bcolors.BLACK)
                 sstatus = 'total:' + format(total) + ' count:' + format(count)
                 progress(count, total, status=sstatus)
-                cmd = "nmap -sS -T4 " + ip + " --open -oN " + dir_path + '/logs/nmap_syn_' + ip + '_' + stime + '.txt'
+                cmd = "nmap -sS -T4 " + ip + " --open -oN " + directory + '/nmap_syn_' + ip + '_' + stime + '.txt'
                 #result = os.system(cmd)
                 start = time.time()
                 output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
