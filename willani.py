@@ -17,6 +17,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--scan', nargs='?', help='выберите режим сканирования fast или full')
+args = parser.parse_args()
 
 
 # encoding=utf8
