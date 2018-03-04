@@ -77,7 +77,7 @@ try:
                 os.stat(directory)
             except:
                 os.mkdir(directory)
-                continue
+                break
         for line in lines:
             #
             ip = line
