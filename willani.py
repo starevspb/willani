@@ -60,6 +60,7 @@ def check_service(ip, port):
     service_type = ports[1] # получаем тип сервиса
     service_version = ports[2] # получаем версию сервиса
     res = service_type + " " + service_version
+    print res
     return str(res)
 
 def progress(count, total, status=''):
