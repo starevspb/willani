@@ -50,15 +50,26 @@ def check_service(ip, port):
     global bcolors
     global directory
     global subprocess
-    port = re.findall('(\d+)', port)
+    port = re.findall('(\d+)', port) # преобразуем порт в число, приходит с /tcp
     cmd = "nmap -sS -sV " + str(ip) + " -p " + str(port) + " -oN " + directory + '/nmap_check_service_' + str(ip) + '_' + str(port) + '.txt'
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     ports = re.findall("open.*", output.stdout.read(), re.MULTILINE)
     ports = ports[0] # конвертируем в строку
     ports = re.sub(r'\s+', ' ', ports) # удаляем лищние пробелы
     ports = ports.split(' ', 2) # разбиваем строку на массив
-    service_type = ports[1] # получаем тип сервиса
-    service_version = ports[2] # получаем версию сервиса
+
+    # получаем тип сервиса
+    try:
+        service_type = ports[1]
+    except IndexError:
+        service_type = 'null'
+
+    # получаем версию сервиса
+    try:
+        service_version = ports[2]
+    except IndexError:
+        service_version = 'null'
+
     res = service_type + " " + service_version
     return str(res)
 
