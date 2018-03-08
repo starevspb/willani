@@ -46,6 +46,13 @@ class bcolors:
     GREY = '\033[97m'
     BLACK = '\033[30m' # обычный
 
+def check_service(ip, port)
+    global bcolors, directory, subprocess
+    cmd = "nmap -sS -sV " + str(ip) + " -p " + str(port) + " -oN " + directory + '/nmap_check_service_' + str(ip) + '_' + str(port) + '.txt'
+    output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    ports = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
+    return ports
+
 def progress(count, total, status=''):
     global bcolors
     bar_len = 50
@@ -122,6 +129,9 @@ try:
                     print("Найдены следующие порты:                                                                                                ")
                     for x in items:
                         print x
+                        ports = check_service(ip, x)
+                        for port in ports:
+                            print port
                     with open(directory + '/summary.csv', 'a+') as f:
                         f.write(ip + ";" + ', '.join(items) + '\n')
                 else:
