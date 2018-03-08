@@ -59,7 +59,8 @@ def check_service(ip, port):
     ports = ports.split(' ', 2) # разбиваем строку на массив
     service_type = ports[1] # получаем тип сервиса
     service_version = ports[2] # получаем версию сервиса
-    return service_type + " " + service_version
+    res = service_type + " " + service_version
+    return str(res)
 
 def progress(count, total, status=''):
     global bcolors
