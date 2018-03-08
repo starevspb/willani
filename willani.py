@@ -53,7 +53,7 @@ def check_service(ip, port):
     port = re.findall('(\d+)', port)
     cmd = "nmap -sS -sV " + str(ip) + " -p " + str(port) + " -oN " + directory + '/nmap_check_service_' + str(ip) + '_' + str(port) + '.txt'
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    ports = re.findall(".*tcp", output.stdout.read(), re.MULTILINE)
+    ports = re.findall("open.*", output.stdout.read(), re.MULTILINE)
     return ports
 
 def progress(count, total, status=''):
