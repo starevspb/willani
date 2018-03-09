@@ -49,10 +49,22 @@ class bcolors:
 def check_service(ip, port):
     global bcolors
     global directory
-    global subprocess
+    global subprocess, total, count
+    start = time.time()
     port = re.findall('(\d+)', port) # преобразуем порт в число, приходит с /tcp
     cmd = "nmap -sS -sV " + str(ip) + " -p " + str(port) + " -oN " + directory + '/nmap_check_service_' + str(ip) + '_' + str(port) + '.txt'
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    while output.poll() is None:
+        sleep(0.5)
+        # Подсчет времени выполнения
+        elapsed = time.time()
+        elapsed = int(elapsed - start)
+        out = " | Время задачи: " + str(elapsed) + " сек."
+        sstatus = 'Всего:' + format(total) + ' Выполнено:' + format(count) + out
+        # Выводим прогрессбар
+        progress(count, total, status=sstatus)
+
     ports = re.findall("open.*", output.stdout.read(), re.MULTILINE)
     ports = ports[0] # конвертируем в строку
     ports = re.sub(r'\s+', ' ', ports) # удаляем лищние пробелы
