@@ -84,7 +84,7 @@ def check_service(ip, port):
 
     # сохраняем IP:port по типу
     with open(directory + '/' + service_type, 'a+') as f:
-        f.write(ip + ":" + port + '\n')
+        f.write(str(ip) + ":" + str(port) + '\n')
 
     res = service_type + " " + service_version
     return str(res)
