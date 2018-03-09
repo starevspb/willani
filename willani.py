@@ -74,6 +74,7 @@ def check_service(ip, port):
     # получаем тип сервиса
     try:
         service_type = ports[1]
+        service_type = service_type.replace("/", "-")
     except IndexError:
         service_type = 'null'
 
