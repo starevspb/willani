@@ -204,52 +204,56 @@ try:
             count += 1
 
     # Запуск тестов для ssl-https
-    with open(directory + '/' + 'ssl-https') as f:
-        lines = f.read().splitlines()
-        total = len(lines)
-        count = 0
-        for line in lines:
-            #
-            ip = line
-            print(bcolors.GREEN + "Поиск скрытых директорий: https://" + ip + bcolors.BLACK)
-            url = 'https://' + str(ip)
-            check_dirb(url)
+    if os.path.exists(directory + '/' + 'ssl-https'):
+        with open(directory + '/' + 'ssl-https') as f:
+            lines = f.read().splitlines()
+            total = len(lines)
+            count = 0
+            for line in lines:
+                #
+                ip = line
+                print(bcolors.GREEN + "Поиск скрытых директорий: https://" + ip + bcolors.BLACK)
+                url = 'https://' + str(ip)
+                check_dirb(url)
 
     # Запуск тестов для ssl-http
-    with open(directory + '/' + 'ssl-http') as f:
-        lines = f.read().splitlines()
-        total = len(lines)
-        count = 0
-        for line in lines:
-            #
-            ip = line
-            print(bcolors.GREEN + "Поиск скрытых директорий: https://" + ip + bcolors.BLACK)
-            url = 'https://' + str(ip)
-            check_dirb(url)
+    if os.path.exists(directory + '/' + 'ssl-http'):
+        with open(directory + '/' + 'ssl-http') as f:
+            lines = f.read().splitlines()
+            total = len(lines)
+            count = 0
+            for line in lines:
+                #
+                ip = line
+                print(bcolors.GREEN + "Поиск скрытых директорий: https://" + ip + bcolors.BLACK)
+                url = 'https://' + str(ip)
+                check_dirb(url)
 
     # Запуск тестов для http
-    with open(directory + '/' + 'http') as f:
-        lines = f.read().splitlines()
-        total = len(lines)
-        count = 0
-        for line in lines:
-            #
-            ip = line
-            print(bcolors.GREEN + "Поиск скрытых директорий: http://" + ip + bcolors.BLACK)
-            url = 'http://' + str(ip)
-            check_dirb(url)
+    if os.path.exists(directory + '/' + 'http'):
+        with open(directory + '/' + 'http') as f:
+            lines = f.read().splitlines()
+            total = len(lines)
+            count = 0
+            for line in lines:
+                #
+                ip = line
+                print(bcolors.GREEN + "Поиск скрытых директорий: http://" + ip + bcolors.BLACK)
+                url = 'http://' + str(ip)
+                check_dirb(url)
 
     # Запуск тестов для http-proxy
-    with open(directory + '/' + 'http-proxy') as f:
-        lines = f.read().splitlines()
-        total = len(lines)
-        count = 0
-        for line in lines:
-            #
-            ip = line
-            print(bcolors.GREEN + "Поиск скрытых директорий: http://" + ip + bcolors.BLACK)
-            url = 'http://' + str(ip)
-            check_dirb(url)
+    if os.path.exists(directory + '/' + 'http-proxy'):
+        with open(directory + '/' + 'http-proxy') as f:
+            lines = f.read().splitlines()
+            total = len(lines)
+            count = 0
+            for line in lines:
+                #
+                ip = line
+                print(bcolors.GREEN + "Поиск скрытых директорий: http://" + ip + bcolors.BLACK)
+                url = 'http://' + str(ip)
+                check_dirb(url)
 
 except KeyboardInterrupt:
     # quit
