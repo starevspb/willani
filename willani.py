@@ -46,6 +46,26 @@ class bcolors:
     GREY = '\033[97m'
     BLACK = '\033[30m' # обычный
 
+def check_dirb(url):
+    global bcolors,directory,subprocess, total, count
+    start = time.time()
+    url2 = url
+    url2 = url2.replace(":", "")
+    url2 = url2.replace("//", "_")
+    url2 = url2.replace("/", "_")
+    cmd = "dirb " + str(url) + " -o " + directory + '/dirb_check_service_' + str(url2) + '_' +  '.txt'
+    output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    while output.poll() is None:
+        sleep(0.5)
+        # Подсчет времени выполнения
+        elapsed = time.time()
+        elapsed = int(elapsed - start)
+        out = " | Время задачи: " + str(elapsed) + " сек."
+        sstatus = 'Всего:' + format(total) + ' Выполнено:' + format(count) + out
+        # Выводим прогрессбар
+        progress(count, total, status=sstatus)
+    return 1
+
 def check_service(ip, port):
     global bcolors
     global directory
@@ -182,6 +202,20 @@ try:
                 print(bcolors.RED + "Неверный IP адрес: "  + ip + bcolors.BLACK)
             # Обновление счетчика
             count += 1
+
+    # Запуск тестов для ssl-https
+    with open(directory + '/' + 'ssl-https') as f:
+        lines = f.read().splitlines()
+        total = len(lines)
+        count = 0
+        for line in lines:
+            #
+            ip = line
+            print(bcolors.GREEN + "Поиск скрытых директорий: https://" + ip + bcolors.BLACK)
+            url = 'https://' + str(ip)
+            check_dirb(url)
+
+
 
 
 except KeyboardInterrupt:
