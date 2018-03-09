@@ -50,9 +50,9 @@ def check_dirb(url):
     global bcolors,directory,subprocess, total, count
     start = time.time()
     url2 = url
-    url2 = url2.replace(":", "")
-    url2 = url2.replace("//", "_")
+    url2 = url2.replace("://", "_")
     url2 = url2.replace("/", "_")
+    url2 = url2.replace(":", "_")
     cmd = "dirb " + str(url) + " -o " + directory + '/dirb_check_service_' + str(url2) + '_' +  '.txt'
     output = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     while output.poll() is None:
